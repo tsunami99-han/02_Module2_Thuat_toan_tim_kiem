@@ -7,24 +7,25 @@ public class Main {
 
         System.out.print("Nhập chuỗi: ");
         String string = input.nextLine();
-
         LinkedList<Character> max = new LinkedList<>();
-        for (int i = 0; i < string.length(); i++) {
-            LinkedList<Character> list = new LinkedList<>();
+        LinkedList<Character> list = new LinkedList<>();
 
-            list.add(string.charAt(i));
-            for (int j = i + 1; j < string.length(); j++) {
-                if (string.charAt(j) > list.getLast()) {
-
-                    list.add(string.charAt(j));
+        list.add(string.charAt(0));
+        for (int j = 1; j < string.length(); j++) {
+            if (string.charAt(j) > list.getLast()) {
+                list.add(string.charAt(j));
+            } else {
+                if (list.size() > max.size()) {
+                    max.clear();
+                    max.addAll(list);
                 }
+                list.clear();
+                list.add(string.charAt(j));
             }
-
-            if (list.size() > max.size()) {
-                max.clear();
-                max.addAll(list);
-            }
-            list.clear();
+        }
+        if (list.size() > max.size()) {
+            max.clear();
+            max.addAll(list);
         }
         for (Character ch : max) {
             System.out.print(ch);
